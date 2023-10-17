@@ -1,0 +1,99 @@
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet'
+        integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous' />
+    <title>Appel de loyer</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width:
+                100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding:
+                8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Loyer du {{ date }}</h2>
+    <h3>Info Bien</h3>
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>{{ propertytype }}</th>
+        </tr>
+        <tr>
+            <th>Loyer</th>
+            <th>{{ propertyrental }} Ar</th>
+        </tr>
+        <tr>
+            <th>Surface</th>
+            <th>{{ propertyarea }}</th>
+        </tr>
+        <tr>
+            <td>Adresse postale</td>
+            <td>{{propertypostalAddress}}</td>
+        </tr>
+    </table>
+    <hr />
+    <h3>Info Locataire</h3>
+    <table>
+        <tr>
+            <th>nom</th>
+            <th>{{ tenantfirstName }}</th>
+        </tr>
+        <tr>
+            <th>prenom</th>
+            <th>{{ tenantlastName }}</th>
+        </tr>
+        <tr>
+            <th>email</th>
+            <th>{{ tenantemail }}</th>
+        </tr>
+        <tr>
+            <td>Adresse postale</td>
+            <td>{{tenantpostalAddress}}</td>
+        </tr>
+        <tr>
+            <td>telephone</td>
+            <td>{{tenantphone}}</td>
+        </tr>
+    </table>
+    <hr />
+    <h3>Info propriétaire</h3>
+    <table>
+        <tr>
+            <th>nom</th>
+            <th>{{ ownerfirstName }}</th>
+        </tr>
+        <tr>
+            <th>prenom</th>
+            <th>{{ ownerlastName }}</th>
+        </tr>
+        <tr>
+            <th>email</th>
+            <th>{{ owneremail }}</th>
+        </tr>
+        <tr>
+            <td>Adresse postale</td>
+            <td>{{ownerpostalAddress}}</td>
+        </tr>
+    </table>
+</body>
+
+</html>

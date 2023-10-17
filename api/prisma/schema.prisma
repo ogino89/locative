@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Owner {
+  id                           String              @id @default(auto()) @map("_id") @db.ObjectId
+  firstName                    String
+  lastName                     String
+  email                        String              @unique
+  postalAddress                String
+  password                     String
+  refreshToken                 String?
+  property                     Property[]
+  tenant                       Tenant[]
+}
+
+enum EnumTypeProperty {
+  APARTMENT
+  HOUSES
+}
+
+model Property {
+   id                 String              @id @default(auto()) @map("_id") @db.ObjectId
+   type               EnumTypeProperty
+   rental             Float
+   area               String
+   postalAddress      String
+   owner              Owner               @relation(fields: [ownerId], references: [id])
+   ownerId            String              @db.ObjectId
+   tenant             Tenant?
+}
+
+enum EnumStausRentCall {
+  PENDING
+  PAID
+}
+
+model RentCall {
+  id                           String              @id @default(auto()) @map("_id") @db.ObjectId
+  month                        DateTime
+  status                       EnumStausRentCall
+  amount                       Float
+  tenant                       Tenant?             @relation(fields: [tenantId], references: [id])
+  tenantId                     String?             @db.ObjectId
+}
+
+model Tenant {
+  id                           String              @id @default(auto()) @map("_id") @db.ObjectId
+  firstName                    String
+  lastName                     String
+  email                        String
+  postalAddress                String
+  phone                        String
+  owner                        Owner               @relation(fields: [ownerId], references: [id])
+  ownerId                      String              @db.ObjectId
+  property                     Property            @relation(fields: [propertyId], references: [id])
+  propertyId                   String              @db.ObjectId  @unique
+  rentCall                     RentCall[]
+}
